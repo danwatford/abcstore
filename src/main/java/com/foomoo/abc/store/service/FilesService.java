@@ -70,7 +70,7 @@ public class FilesService {
      */
     public List<FileSummary> getFiles() {
 
-        final List<DbFile> recentFiles = mongoFileStoreClient.getRecentFiles(2);
+        final List<DbFile> recentFiles = mongoFileStoreClient.getRecentFiles(ServiceConfiguration.RECENT_FILE_COUNT);
 
         return recentFiles
                 .stream()
@@ -110,7 +110,7 @@ public class FilesService {
      * @return The {@link List} of {@link RequestSummary} for the most recently made add file requests.
      */
     public List<RequestSummary> getRequests() {
-        final List<DbRequest> recentRequests = mongoFileStoreClient.getRecentRequests(2);
+        final List<DbRequest> recentRequests = mongoFileStoreClient.getRecentRequests(ServiceConfiguration.RECENT_REQUEST_COUNT);
 
         return recentRequests
                 .stream()
