@@ -1,23 +1,23 @@
-# ABC File Store
-Service for storing ABC notation files within a MongoDB database.
+# String Store
+Libraries and web service for storing Strings within a MongoDB database.
 
-Attempts to add a duplicate file are successful, but the ID of the original file is returned. Duplicate files are
+Attempts to add a duplicate string are successful, but the ID of the original string is returned. Duplicate strings are
 detected based on the hash of their content.
 
-All requests to upload a file, whether new or duplicate, result in a new request ID being returned.
+All requests to store a string, whether new or duplicate, result in a new request ID being returned.
 
-Summaries of requests or files can be retrieved by ID.
+Summaries of requests or strings can be retrieved by ID.
 
-File content can be retrieved by ID.
+Strings can be retrieved by ID.
 
-No processing of the file content is performed.
+No processing of the string content is performed.
 
-Although intended for storing ABC files, this service essentially stores any received file content as strings and
-doesn't place any restriction on the files added to storage.
+This project was originally intended for storing ABC Notation Files, but became general purpose string storage
+when it was realised that the storage of the file content with minimal metadata all that was needed.
 
 # Building
 This service can be built using maven.
 
 # Deployment
-This service can be deployed as a servlet using the built WAR file, or by running as a Grizzly HTTP Server by
+This service can be deployed as a servlet using the WAR file, or by running as a Grizzly HTTP Server by
 executing class com.foomoo.abc.store.app.App.

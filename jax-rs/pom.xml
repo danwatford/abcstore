@@ -3,23 +3,23 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>abc-store</artifactId>
-        <groupId>com.foomoo.abc</groupId>
+        <artifactId>string-store</artifactId>
+        <groupId>com.foomoo.string-store</groupId>
         <version>0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>abc-store-jax-rs</artifactId>
+    <artifactId>string-store-jax-rs</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>abc-store-resources</artifactId>
+            <artifactId>string-store-resources</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.foomoo.abc.store.service-providers</groupId>
-            <artifactId>abc-store-service-provider-mongo</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>string-store-service-provider-mongo</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

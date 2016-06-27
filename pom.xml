@@ -3,8 +3,8 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.foomoo.abc</groupId>
-    <artifactId>abc-store</artifactId>
+    <groupId>com.foomoo.string-store</groupId>
+    <artifactId>string-store</artifactId>
     <packaging>pom</packaging>
     <version>0.1-SNAPSHOT</version>
     <modules>
@@ -16,7 +16,7 @@
         <module>grizzly</module>
         <module>ws-messages</module>
     </modules>
-    <name>abc-store</name>
+    <name>string-store</name>
 
     <dependencyManagement>
         <dependencies>
