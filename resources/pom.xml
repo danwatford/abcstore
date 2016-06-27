@@ -13,18 +13,19 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.foomoo.abc</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>abc-store-service-api</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.foomoo.abc</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>abc-store-ws-messages</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-multipart</artifactId>
+            <version>${jersey.version}</version>
         </dependency>
     </dependencies>
 

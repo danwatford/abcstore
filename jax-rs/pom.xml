@@ -13,18 +13,19 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.foomoo.abc</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>abc-store-resources</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.foomoo.abc.store.service-providers</groupId>
             <artifactId>abc-store-service-provider-mongo</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-server</artifactId>
+            <version>${jersey.version}</version>
         </dependency>
     </dependencies>
 

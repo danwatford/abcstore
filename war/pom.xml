@@ -10,12 +10,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>abc-store-war</artifactId>
+    <packaging>war</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>com.foomoo.abc</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>abc-store-jax-rs</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 

@@ -13,13 +13,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.foomoo.abc</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>abc-store-jax-rs</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-grizzly2-http</artifactId>
+            <version>${jersey.version}</version>
         </dependency>
     </dependencies>
 
