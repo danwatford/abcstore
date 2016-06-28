@@ -12,7 +12,7 @@
         <module>resources</module>
         <module>service-api</module>
         <module>service-providers/mongo</module>
-        <module>jax-rs</module>
+        <module>integration</module>
         <module>grizzly</module>
         <module>ws-messages</module>
     </modules>
