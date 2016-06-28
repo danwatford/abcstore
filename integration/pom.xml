@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>string-store-jax-rs</artifactId>
+    <artifactId>string-store-integration</artifactId>
 
     <dependencies>
         <dependency>

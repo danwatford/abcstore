@@ -1,5 +1,6 @@
 package com.foomoo.stringstore.app;
 
+import com.foomoo.stringstore.jersey.FileStoreResourceConfig;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;

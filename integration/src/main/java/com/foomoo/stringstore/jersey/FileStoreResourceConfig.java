@@ -1,6 +1,7 @@
-package com.foomoo.stringstore.app;
+package com.foomoo.stringstore.jersey;
 
 import com.foomoo.stringstore.mapper.FileNotFoundExceptionMapper;
+import com.foomoo.stringstore.mapper.MongoTimeoutExceptionMapper;
 import com.foomoo.stringstore.resource.FilesResource;
 import com.foomoo.stringstore.resource.RequestsResource;
 import com.foomoo.stringstore.resource.StatusResource;

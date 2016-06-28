@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>string-store-jax-rs</artifactId>
+            <artifactId>string-store-integration</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

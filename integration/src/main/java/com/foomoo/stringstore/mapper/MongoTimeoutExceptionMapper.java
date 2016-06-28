@@ -1,4 +1,4 @@
-package com.foomoo.stringstore.app;
+package com.foomoo.stringstore.mapper;
 
 import com.mongodb.MongoTimeoutException;
 

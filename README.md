@@ -19,5 +19,5 @@ when it was realised that the storage of the file content with minimal metadata 
 This service can be built using maven.
 
 # Deployment
-This service can be deployed as a servlet using the WAR file, or by running as a Grizzly HTTP Server by
-executing class com.foomoo.abc.store.app.App.
+This service can be deployed as a servlet using the WAR file from the string-store-war module, or by running as a
+Grizzly HTTP Server by running class com.foomoo.stringstore.app.App from the string-store-grizzly module.
