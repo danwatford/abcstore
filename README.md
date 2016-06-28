@@ -20,4 +20,5 @@ This service can be built using maven.
 
 # Deployment
 This service can be deployed as a servlet using the WAR file from the string-store-war module, or by running as a
-Grizzly HTTP Server by running class com.foomoo.stringstore.app.App from the string-store-grizzly module.
+Grizzly HTTP Server by running class com.foomoo.stringstore.app.App from the string-store-grizzly module (use
+mvn exec:java).

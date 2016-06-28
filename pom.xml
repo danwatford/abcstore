@@ -6,7 +6,7 @@
     <groupId>com.foomoo.string-store</groupId>
     <artifactId>string-store</artifactId>
     <packaging>pom</packaging>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1</version>
     <modules>
         <module>war</module>
         <module>resources</module>
@@ -55,4 +55,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>bintray-danwatford-maven</id>
+            <name>danwatford-maven</name>
+            <url>https://api.bintray.com/maven/danwatford/maven/string-store/;publish=1</url>
+        </repository>
+    </distributionManagement>
 </project>
