@@ -3,26 +3,26 @@ package com.foomoo.stringstore.service;
 import java.util.UUID;
 
 /**
- * Summary of a request to add a file to storage.
+ * Summary of a request to add a string to storage.
  */
 public class RequestSummary {
     private final UUID id;
-    private final UUID fileId;
+    private final UUID stringId;
     private final long epoch;
     private final String user;
 
     /**
-     * Create a RequestSummary representing a request to add a file to storage.
+     * Create a RequestSummary representing a request to add a string to storage.
      *
-     * @param id     The id of the request.
-     * @param fileId The id of the file that the request relates to.
-     * @param epoch  The time that the request was created specified as unix epoch time (the number of milliseconds
-     *               since the unix epoch).
-     * @param user   The user who made the request.
+     * @param id       The id of the request.
+     * @param stringId The id of the string that the request relates to.
+     * @param epoch    The time that the request was created specified as unix epoch time (the number of milliseconds
+     *                 since the unix epoch).
+     * @param user     The user who made the request.
      */
-    public RequestSummary(final UUID id, final UUID fileId, final long epoch, final String user) {
+    public RequestSummary(final UUID id, final UUID stringId, final long epoch, final String user) {
         this.id = id;
-        this.fileId = fileId;
+        this.stringId = stringId;
         this.epoch = epoch;
         this.user = user;
     }
@@ -37,12 +37,12 @@ public class RequestSummary {
     }
 
     /**
-     * Get the id of the file related to the request.
+     * Get the id of the string related to the request.
      *
-     * @return The file id.
+     * @return The string id.
      */
-    public UUID getFileId() {
-        return fileId;
+    public UUID getStringId() {
+        return stringId;
     }
 
     /**

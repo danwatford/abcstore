@@ -1,7 +1,7 @@
 package com.foomoo.stringstore.resource;
 
 import com.foomoo.stringstore.message.RequestSummaryMessage;
-import com.foomoo.stringstore.service.FilesService;
+import com.foomoo.stringstore.service.StringsService;
 import com.foomoo.stringstore.service.RequestSummary;
 
 import javax.inject.Inject;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class RequestsResource {
 
     @Inject
-    private FilesService filesService;
+    private StringsService stringsService;
 
     /**
      * Gets summaries of the most recent requests to add files.
@@ -31,7 +31,7 @@ public class RequestsResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRequests() {
 
-        final List<RequestSummary> requests = filesService.getRequests();
+        final List<RequestSummary> requests = stringsService.getRequests();
 
         final List<RequestSummaryMessage> requestSummaries = requests.stream().map(RequestsResource::toRequestSummaryMessage).collect(Collectors.toList());
 
@@ -46,6 +46,6 @@ public class RequestsResource {
      */
     private static RequestSummaryMessage toRequestSummaryMessage(final RequestSummary requestSummary) {
 
-        return new RequestSummaryMessage(requestSummary.getId(), requestSummary.getFileId(), requestSummary.getEpoch(), requestSummary.getUser());
+        return new RequestSummaryMessage(requestSummary.getId(), requestSummary.getStringId(), requestSummary.getEpoch(), requestSummary.getUser());
     }
 }

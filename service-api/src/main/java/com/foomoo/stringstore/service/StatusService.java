@@ -6,7 +6,7 @@ package com.foomoo.stringstore.service;
 public interface StatusService {
 
     /**
-     * Get the status of the service by reporting the number of files and requests stored.
+     * Get the status of the service by reporting the number of strings and requests stored.
      *
      * @return The status of the service.
      */

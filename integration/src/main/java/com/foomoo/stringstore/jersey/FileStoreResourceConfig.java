@@ -5,8 +5,8 @@ import com.foomoo.stringstore.mapper.MongoTimeoutExceptionMapper;
 import com.foomoo.stringstore.resource.FilesResource;
 import com.foomoo.stringstore.resource.RequestsResource;
 import com.foomoo.stringstore.resource.StatusResource;
-import com.foomoo.stringstore.service.FilesService;
-import com.foomoo.stringstore.service.MongoFilesService;
+import com.foomoo.stringstore.service.StringsService;
+import com.foomoo.stringstore.service.MongoStringsService;
 import com.foomoo.stringstore.service.MongoStatusService;
 import com.foomoo.stringstore.service.StatusService;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
@@ -41,7 +41,7 @@ public class FileStoreResourceConfig extends ResourceConfig {
             @Override
             protected void configure() {
                 bind(MongoStatusService.class).to(StatusService.class);
-                bind(MongoFilesService.class).to(FilesService.class);
+                bind(MongoStringsService.class).to(StringsService.class);
             }
         });
     }

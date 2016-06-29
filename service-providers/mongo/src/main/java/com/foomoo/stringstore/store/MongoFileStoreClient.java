@@ -1,6 +1,6 @@
 package com.foomoo.stringstore.store;
 
-import com.foomoo.stringstore.service.FileNotFoundException;
+import com.foomoo.stringstore.service.StringNotFoundException;
 import com.google.common.collect.Iterables;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
@@ -62,16 +62,16 @@ public class MongoFileStoreClient {
      *
      * @param id The id of the document to find.
      * @return The {@link DbFile} found for the given id.
-     * @throws FileNotFoundException If no document is found with the given id.
+     * @throws StringNotFoundException If no document is found with the given id.
      */
-    public DbFile findFileById(final UUID id) throws FileNotFoundException {
+    public DbFile findFileById(final UUID id) throws StringNotFoundException {
         final Document queryDocument = new Document().append("_id", id);
 
         final FindIterable<Document> foundFiles = files.find(queryDocument).limit(1);
 
         final ArrayList<DbFile> dbFiles = foundFiles.map(MongoFileStoreClient::documentToDbFile).into(new ArrayList<>());
         if (dbFiles.isEmpty()) {
-            throw new FileNotFoundException(id);
+            throw new StringNotFoundException(id);
         } else {
             return Iterables.getOnlyElement(dbFiles);
         }

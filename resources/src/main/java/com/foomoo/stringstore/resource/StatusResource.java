@@ -31,7 +31,7 @@ public class StatusResource {
 
         final Status status = statusService.getStatus();
 
-        final StatusSummaryMessage statusSummaryMessage = new StatusSummaryMessage(status.getFiles(), status.getRequests());
+        final StatusSummaryMessage statusSummaryMessage = new StatusSummaryMessage(status.getStrings(), status.getRequests());
 
         return Response.ok(statusSummaryMessage).build();
     }

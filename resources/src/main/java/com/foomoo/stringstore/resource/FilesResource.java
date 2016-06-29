@@ -2,9 +2,9 @@ package com.foomoo.stringstore.resource;
 
 import com.foomoo.stringstore.message.AddFileRequestMessage;
 import com.foomoo.stringstore.message.FileSummaryMessage;
-import com.foomoo.stringstore.service.AddFileResult;
-import com.foomoo.stringstore.service.FileNotFoundException;
-import com.foomoo.stringstore.service.FilesService;
+import com.foomoo.stringstore.service.AddStringResult;
+import com.foomoo.stringstore.service.StringNotFoundException;
+import com.foomoo.stringstore.service.StringsService;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.inject.Inject;
@@ -20,14 +20,14 @@ import java.util.UUID;
 public class FilesResource {
 
     @Inject
-    private FilesService filesService;
+    private StringsService stringsService;
 
     /**
      * Adds a file to the store.
      *
      * @param addFileRequestMessage Metadata for file to be stored.
      * @param content        The file content to store.
-     * @return A success response containing an {@link AddFileResult} entity.
+     * @return A success response containing an {@link AddStringResult} entity.
      */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -35,9 +35,9 @@ public class FilesResource {
     public Response addFile(@FormDataParam("request") AddFileRequestMessage addFileRequestMessage,
                             @FormDataParam("content") String content) {
 
-        final AddFileResult addFileResult = filesService.addFile(addFileRequestMessage.getUser(), content);
+        final AddStringResult addStringResult = stringsService.addString(addFileRequestMessage.getUser(), content);
 
-        return Response.ok(addFileResult).build();
+        return Response.ok(addStringResult).build();
     }
 
     /**
@@ -49,7 +49,7 @@ public class FilesResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getFiles() {
 
-        return Response.ok(filesService.getFiles()).build();
+        return Response.ok(stringsService.getStrings()).build();
     }
 
     /**
@@ -57,14 +57,14 @@ public class FilesResource {
      *
      * @param fileId The file id.
      * @return A success response containing a {@link FileSummaryMessage} entity.
-     * @throws FileNotFoundException If the file for the given file id cannot be found.
+     * @throws StringNotFoundException If the file for the given file id cannot be found.
      */
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getFileSummary(@PathParam("id") final UUID fileId) throws FileNotFoundException {
+    public Response getFileSummary(@PathParam("id") final UUID fileId) throws StringNotFoundException {
 
-        return Response.ok(filesService.getFile(fileId)).build();
+        return Response.ok(stringsService.getString(fileId)).build();
     }
 
     /**
@@ -72,14 +72,14 @@ public class FilesResource {
      *
      * @param fileId The file id.
      * @return A success response containing the file content as a {@link String} entity.
-     * @throws FileNotFoundException If the file for the given file id cannot be found.
+     * @throws StringNotFoundException If the file for the given file id cannot be found.
      */
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     @Path("{id}/content")
-    public Response getFileContent(@PathParam("id") final UUID fileId) throws FileNotFoundException {
+    public Response getFileContent(@PathParam("id") final UUID fileId) throws StringNotFoundException {
 
-        return Response.ok(filesService.getFileContent(fileId)).build();
+        return Response.ok(stringsService.getStringContent(fileId)).build();
     }
 
 }
