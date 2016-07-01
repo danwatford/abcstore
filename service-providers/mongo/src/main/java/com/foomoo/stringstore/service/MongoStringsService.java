@@ -1,22 +1,23 @@
 package com.foomoo.stringstore.service;
 
-import com.foomoo.stringstore.store.DbFile;
+import com.foomoo.stringstore.store.DbString;
 import com.foomoo.stringstore.store.DbRequest;
-import com.foomoo.stringstore.store.MongoFileStoreClient;
+import com.foomoo.stringstore.store.MongoStringStoreClient;
 import com.google.common.collect.Iterables;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- * Mongo implementation of the file service.
+ * Mongo implementation of the string service.
  */
 public class MongoStringsService implements StringsService {
 
-    private final MongoFileStoreClient mongoFileStoreClient = MongoFileStoreClient.instance;
+    private final MongoStringStoreClient mongoStringStoreClient = MongoStringStoreClient.instance;
 
     @Override
     public AddStringResult addString(final String user, final String content) {
@@ -24,73 +25,91 @@ public class MongoStringsService implements StringsService {
         final UUID requestId = UUID.randomUUID();
         final long epoch = Instant.now().toEpochMilli();
 
-        // Hash the content to determine a filename, then see if that filename already exists in the store.
-        final String fileSha1 = DigestUtils.sha1Hex(content);
-        final List<DbFile> foundDbFiles = mongoFileStoreClient.findFileBySizeHash(content.length(), fileSha1);
+        final String stringSha1 = DigestUtils.sha1Hex(content);
+        final List<DbString> foundDbStrings = mongoStringStoreClient.findStringBySizeHash(content.length(), stringSha1);
 
-        final UUID fileId;
-        final boolean existingFile;
-        if (foundDbFiles.isEmpty()) {
-            fileId = UUID.randomUUID();
-            existingFile = false;
-            final DbFile dbFile = new DbFile(fileId, user, content.length(), epoch, fileSha1, content);
+        final UUID stringId;
+        final boolean existingString;
+        if (foundDbStrings.isEmpty()) {
+            stringId = UUID.randomUUID();
+            existingString = false;
+            final DbString dbString = new DbString(stringId, user, content.length(), epoch, stringSha1, content);
 
-            mongoFileStoreClient.addFile(dbFile);
+            mongoStringStoreClient.addString(dbString);
         } else {
-            final DbFile dbFile = Iterables.getOnlyElement(foundDbFiles);
-            fileId = dbFile.getId();
-            existingFile = true;
+            final DbString dbString = Iterables.getOnlyElement(foundDbStrings);
+            stringId = dbString.getId();
+            existingString = true;
         }
 
-        final DbRequest dbRequest = new DbRequest(requestId, user, fileId, epoch);
-        mongoFileStoreClient.addRequest(dbRequest);
+        final DbRequest dbRequest = new DbRequest(requestId, user, stringId, epoch);
+        mongoStringStoreClient.addRequest(dbRequest);
 
-        return new AddStringResult(fileId, requestId, user, existingFile);
+        return new AddStringResult(stringId, requestId, user, existingString);
     }
 
     @Override
-    public List<StringSummary> getStrings() {
+    public List<StringSummary> getStringSummaries() {
 
-        final List<DbFile> recentFiles = mongoFileStoreClient.getRecentFiles(ServiceConfiguration.RECENT_FILE_COUNT);
+        final List<DbString> recentStrings = mongoStringStoreClient.getRecentStrings(ServiceConfiguration.RECENT_STRING_COUNT);
 
-        return recentFiles
+        return recentStrings
                 .stream()
-                .map(MongoStringsService::dbFileToFileSummary)
+                .map(MongoStringsService::dbStringToStringSummary)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public StringSummary getString(final UUID id) throws StringNotFoundException {
-        final DbFile dbFile = mongoFileStoreClient.findFileById(id);
+    public List<StringSummary> getAllStringSummaries() {
+        final List<DbString> allStrings = mongoStringStoreClient.getRecentStrings(ServiceConfiguration.RECENT_STRING_COUNT);
 
-        return dbFileToFileSummary(dbFile);
+        return allStrings
+                .stream()
+                .map(MongoStringsService::dbStringToStringSummary)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public StringSummary getStringSummary(final UUID id) throws StringNotFoundException {
+        final DbString dbString = mongoStringStoreClient.findStringById(id);
+
+        return dbStringToStringSummary(dbString);
     }
 
     @Override
     public String getStringContent(final UUID id) throws StringNotFoundException {
-        final DbFile dbFile = mongoFileStoreClient.findFileById(id);
+        final DbString dbString = mongoStringStoreClient.findStringById(id);
 
-        return dbFile.getContent();
+        return dbString.getContent();
+    }
+
+    @Override
+    public Map<UUID, String> getStringsContent(final UUID... ids) {
+        final List<DbString> dbStrings = mongoStringStoreClient.findStringsByIds(ids);
+
+        return dbStrings
+                .stream()
+                .collect(Collectors.toMap(DbString::getId, DbString::getContent));
     }
 
     @Override
     public List<RequestSummary> getRequests() {
-        final List<DbRequest> recentRequests = mongoFileStoreClient.getRecentRequests(ServiceConfiguration.RECENT_REQUEST_COUNT);
+        final List<DbRequest> recentRequests = mongoStringStoreClient.getRecentRequests(ServiceConfiguration.RECENT_REQUEST_COUNT);
 
         return recentRequests
                 .stream()
-                .map(dbRequest -> new RequestSummary(dbRequest.getId(), dbRequest.getFileId(), dbRequest.getEpoch(), dbRequest.getUser()))
+                .map(dbRequest -> new RequestSummary(dbRequest.getId(), dbRequest.getStringId(), dbRequest.getEpoch(), dbRequest.getUser()))
                 .collect(Collectors.toList());
     }
 
     /**
-     * Creates a {@link StringSummary} for the given {@link DbFile} object.
+     * Creates a {@link StringSummary} for the given {@link DbString} object.
      *
-     * @param dbFile The object to convert.
+     * @param dbString The object to convert.
      * @return The created {@link StringSummary}.
      */
-    private static StringSummary dbFileToFileSummary(final DbFile dbFile) {
-        return new StringSummary(dbFile.getId(), dbFile.getEpoch(), dbFile.getSize());
+    private static StringSummary dbStringToStringSummary(final DbString dbString) {
+        return new StringSummary(dbString.getId(), dbString.getEpoch(), dbString.getSize());
     }
 
 }

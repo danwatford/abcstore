@@ -8,33 +8,33 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class StatusSummaryMessage {
 
-    private final long files;
+    private final long strings;
     private final long requests;
 
     /**
-     * Construct a StatusSummaryMessage object representing the state of the storage service with the given number of files and
-     * requests.
+     * Construct a StatusSummaryMessage object representing the state of the storage service with the given number of
+     * strings and requests.
      *
-     * @param files    The number of files stored by the service.
-     * @param requests The number of requests to store files received by the service.
+     * @param strings  The number of strings stored by the service.
+     * @param requests The number of requests to store strings received by the service.
      */
     @JsonCreator
-    public StatusSummaryMessage(@JsonProperty("files") final long files, @JsonProperty("requests") final long requests) {
-        this.files = files;
+    public StatusSummaryMessage(@JsonProperty("strings") final long strings, @JsonProperty("requests") final long requests) {
+        this.strings = strings;
         this.requests = requests;
     }
 
     /**
-     * Get the number of files stored by the storage service.
+     * Get the number of strings stored by the storage service.
      *
-     * @return The number of files.
+     * @return The number of strings.
      */
-    public long getFiles() {
-        return files;
+    public long getStrings() {
+        return strings;
     }
 
     /**
-     * Get the number of requests to store files received by the storage service.
+     * Get the number of requests to store strings received by the storage service.
      *
      * @return The number of requests.
      */

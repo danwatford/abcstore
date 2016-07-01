@@ -1,6 +1,7 @@
 package com.foomoo.stringstore.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -28,7 +29,14 @@ public interface StringsService {
      *
      * @return The {@link List} of {@link StringSummary} for the recently added string.
      */
-    List<StringSummary> getStrings();
+    List<StringSummary> getStringSummaries();
+
+    /**
+     * Get summaries of all the strings in the store.
+     *
+     * @return The {@link List} of {@link StringSummary} for all strings in the store.
+     */
+    List<StringSummary> getAllStringSummaries();
 
     /**
      * Get the summary of the string in the store identified by the given string id.
@@ -37,7 +45,7 @@ public interface StringsService {
      * @return The {@link StringSummary} of the string.
      * @throws StringNotFoundException If the string for the given string id cannot be found.
      */
-    StringSummary getString(UUID id) throws StringNotFoundException;
+    StringSummary getStringSummary(UUID id) throws StringNotFoundException;
 
     /**
      * Get the content of the string in the store identified by the given string id.
@@ -47,6 +55,15 @@ public interface StringsService {
      * @throws StringNotFoundException If the string for the given string id cannot be found.
      */
     String getStringContent(UUID id) throws StringNotFoundException;
+
+    /**
+     * Get the content of the strings identified by the given string ids. Strings will be returned in a map keyed by the
+     * string id. Any strings that cannot be found by id will be absent from the returned list.
+     *
+     * @param ids The set of string ids to retrieve content for.
+     * @return Map of string ids to string content for the found strings.
+     */
+    Map<UUID, String> getStringsContent(UUID... ids);
 
     /**
      * Get summaries of the add string requests most recently made against the store.

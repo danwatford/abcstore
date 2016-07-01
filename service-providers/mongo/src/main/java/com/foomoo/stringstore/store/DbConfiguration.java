@@ -17,10 +17,10 @@ public class DbConfiguration {
     public static final int PORT;
 
     public static final String DATABASE;
-    public static final String FILES_COLLECTION;
+    public static final String STRINGS_COLLECTION;
     public static final String REQUESTS_COLLECTION;
 
-    private static final String PROPERTIES_FILE_PATH = "/opt/abcstore/conf/db.properties";
+    private static final String PROPERTIES_FILE_PATH = "/opt/stringstore/conf/db.properties";
 
     /**
      * Initialise this class based on the properties file found at path PROPERTIES_FILE_PATH.
@@ -41,8 +41,8 @@ public class DbConfiguration {
             HOSTNAME = configuration.getString("hostname", "localhost");
             PORT = configuration.getInt("port", 27017);
 
-            DATABASE = configuration.getString("database", "filestore");
-            FILES_COLLECTION = configuration.getString("collection.files", "files");
+            DATABASE = configuration.getString("database", "stringstore");
+            STRINGS_COLLECTION = configuration.getString("collection.strings", "strings");
             REQUESTS_COLLECTION = configuration.getString("collection.requests", "requests");
         } catch (ConfigurationException configurationException) {
             throw new ExceptionInInitializerError(configurationException);

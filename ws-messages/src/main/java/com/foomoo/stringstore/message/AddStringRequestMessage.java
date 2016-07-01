@@ -4,19 +4,19 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Request to add a file.
+ * Request to add a string.
  */
-public class AddFileRequestMessage {
+public class AddStringRequestMessage {
 
     private final String user;
 
     /**
-     * Construct an AddFileRequestMessage representing the user making the request to add a file.
+     * Construct an AddStringRequestMessage representing the user making the request to add a string.
      *
      * @param user The user making the add request.
      */
     @JsonCreator
-    public AddFileRequestMessage(@JsonProperty("user") final String user) {
+    public AddStringRequestMessage(@JsonProperty("user") final String user) {
         this.user = user;
     }
 

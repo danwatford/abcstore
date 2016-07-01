@@ -8,14 +8,15 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 /**
- * Implementation of {@link ExceptionMapper} to give a Not Found response in the event of a requested file not being
- * found.
+ * Implementation of {@link ExceptionMapper} to give a Not Found response in the event of not finding the requested
+ * string
  */
 @Provider
-public class FileNotFoundExceptionMapper implements ExceptionMapper<StringNotFoundException> {
+public class StringNotFoundExceptionMapper implements ExceptionMapper<StringNotFoundException> {
 
     /**
-     * Convert the given FileNoteFoundException to a not found response containing the message from the exception.
+     * Convert the given {@link StringNotFoundException} to a not found response containing the message from the
+     * exception.
      *
      * @return A not found response.
      */

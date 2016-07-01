@@ -1,8 +1,8 @@
 package com.foomoo.stringstore.jersey;
 
-import com.foomoo.stringstore.mapper.FileNotFoundExceptionMapper;
+import com.foomoo.stringstore.mapper.StringNotFoundExceptionMapper;
 import com.foomoo.stringstore.mapper.MongoTimeoutExceptionMapper;
-import com.foomoo.stringstore.resource.FilesResource;
+import com.foomoo.stringstore.resource.StringsResource;
 import com.foomoo.stringstore.resource.RequestsResource;
 import com.foomoo.stringstore.resource.StatusResource;
 import com.foomoo.stringstore.service.StringsService;
@@ -19,20 +19,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * The File Store Jersey ResourceConfig using MongoDB.
+ * The String Store Jersey ResourceConfig using MongoDB.
  */
 @ApplicationPath("/")
-public class FileStoreResourceConfig extends ResourceConfig {
+public class StringStoreResourceConfig extends ResourceConfig {
 
-    public FileStoreResourceConfig() {
+    public StringStoreResourceConfig() {
 
         final Set<Class<?>> classes = new HashSet<>();
         classes.add(MultiPartFeature.class);
         classes.add(JacksonFeature.class);
-        classes.add(FileNotFoundExceptionMapper.class);
+        classes.add(StringNotFoundExceptionMapper.class);
         classes.add(MongoTimeoutExceptionMapper.class);
         classes.add(StatusResource.class);
-        classes.add(FilesResource.class);
+        classes.add(StringsResource.class);
         classes.add(RequestsResource.class);
 
         registerClasses(classes);

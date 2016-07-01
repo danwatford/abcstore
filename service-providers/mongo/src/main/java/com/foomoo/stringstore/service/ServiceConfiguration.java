@@ -13,10 +13,10 @@ import java.nio.file.Paths;
  */
 public class ServiceConfiguration {
 
-    public static final int RECENT_FILE_COUNT;
+    public static final int RECENT_STRING_COUNT;
     public static final int RECENT_REQUEST_COUNT;
 
-    private static final String PROPERTIES_FILE_PATH = "/opt/abcstore/conf/service.properties";
+    private static final String PROPERTIES_FILE_PATH = "/opt/stringstore/conf/service.properties";
 
     /**
      * Initialise this class based on the properties file found at path PROPERTIES_FILE_PATH.
@@ -34,7 +34,7 @@ public class ServiceConfiguration {
                 configuration = new PropertiesConfiguration();
             }
 
-            RECENT_FILE_COUNT = configuration.getInt("recent.file.count", 10);
+            RECENT_STRING_COUNT = configuration.getInt("recent.string.count", 10);
             RECENT_REQUEST_COUNT = configuration.getInt("recent.request.count", 10);
         } catch (ConfigurationException configurationException) {
             throw new ExceptionInInitializerError(configurationException);

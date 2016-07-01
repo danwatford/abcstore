@@ -23,7 +23,7 @@ public class RequestsResource {
     private StringsService stringsService;
 
     /**
-     * Gets summaries of the most recent requests to add files.
+     * Gets summaries of the most recent requests to add strings.
      *
      * @return A success response containing a {@link java.util.List} of {@link RequestSummaryMessage} objects.
      */
