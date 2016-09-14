@@ -20,17 +20,18 @@ public class DbConfiguration {
     public static final String STRINGS_COLLECTION;
     public static final String REQUESTS_COLLECTION;
 
-    private static final String PROPERTIES_FILE_PATH = "/opt/stringstore/conf/db.properties";
+    private static final String PROPERTIES_FILE_PATH_SYSTEM_PROPERTY = "mongo.store.db.properties";
+    private static final String DEFAULT_PROPERTIES_FILE_PATH = "/opt/stringstore/conf/db.properties";
 
     /**
-     * Initialise this class based on the properties file found at path PROPERTIES_FILE_PATH.
+     * Initialise this class based on the properties file found at path DEFAULT_PROPERTIES_FILE_PATH.
      * If the file cannot be found or it is missing any configuration items then default values will be used.
      */
     static {
         try {
             final Configurations configurations = new Configurations();
 
-            final Path configFilePath = Paths.get(PROPERTIES_FILE_PATH);
+            final Path configFilePath = Paths.get(System.getProperty(PROPERTIES_FILE_PATH_SYSTEM_PROPERTY, DEFAULT_PROPERTIES_FILE_PATH));
             final PropertiesConfiguration configuration;
             if (Files.isReadable(configFilePath)) {
                 configuration = configurations.properties(configFilePath.toFile());
